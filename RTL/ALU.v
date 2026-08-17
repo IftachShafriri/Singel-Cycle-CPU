@@ -2,7 +2,7 @@ module ALU #(parameter WIDTH = 4) (a, b, y, carry, op, overflow, zero, shift_amo
 
 input [WIDTH - 1 : 0] a, b ;
 input [4 : 0] op ;
-input [ceil(log2(WIDTH)) : 0] shift_amount ;
+input [$clog2(WIDTH) : 0] shift_amount ;
 output reg [WIDTH - 1 : 0] y ;
 output reg carry, overflow ;
 output zero ;
@@ -43,8 +43,7 @@ always @* begin
             y = a;
         else 
             y = (a << shift_amount) | (a >> (WIDTH - shift_amount));
-
-    end
+            
     default: y = {WIDTH{1'b0}} ;
     endcase
 end
