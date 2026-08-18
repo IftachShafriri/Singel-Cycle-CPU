@@ -1,4 +1,6 @@
-module Register_File #(parameter Num_of_Registers = 64, parameter Register_Size_Bit = 4 ) //Setting the size of register and the number of registers
+`include "Include/DATA.v"
+
+module Register_File #(parameter Num_of_Registers = `Number_of_Registers, parameter Register_Size_Bit = `Data_WIDTH) //Setting the size of register and the number of registers
     (data_read1,
     data_read2,
     read_addres1,
