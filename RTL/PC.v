@@ -12,12 +12,39 @@ wire [`PC_WIDTH - 1 : 0] INC4_split, branch_wire, const_split, MUX_wire_connect,
 wire neg_wire_select
 
 //ports
-INC4 inc4_connect(.INC4_in(PC_out), .INC4_out(INC4_split));
-BRANCH branch_connect(.Branch_in(PC_out), .constant_in(const_split), .Branch_out(branch_wire), .Neg_check_select(neg_wire_select));
-Sign_Extension_Const Sign_Extension_connect(.constant_out(const_split), .constant_in(constant));
-NEG_MUX_2_1 NEG_MUX_connect(.NEG_MUX_in_0(branch_wire), .NEG_MUX_in_1(INC4_split), .NEG_MUX_select(neg_wire_select), .NEG_MUX_out(MUX_wire_connect));
-PC_MUX PC_MUX_connect(.MUX_in_00(INC4_split), .MUX_in_01(MUX_wire_connect), .MUX_in_10(const_split), .select(select), .PC_MUX_out(register_wire_connect));
-PC_REGISTER PC_register_connect(.next_PC(register_wire_connect), .clk(clock), .reset(reset), .stay(stay), .PC_Register_out(PC_out));
+INC4 inc4_connect(
+    .INC4_in(PC_out),
+    .INC4_out(INC4_split));
+
+BRANCH branch_connect(
+    .Branch_in(PC_out),
+    .constant_in(const_split),
+    .Branch_out(branch_wire),
+    .Neg_check_select(neg_wire_select));
+
+Sign_Extension_Const Sign_Extension_connect(
+    .constant_out(const_split),
+    .constant_in(constant));
+
+NEG_MUX_2_1 NEG_MUX_connect(
+    .NEG_MUX_in_0(branch_wire),
+    .NEG_MUX_in_1(INC4_split),
+    .NEG_MUX_select(neg_wire_select),
+    .NEG_MUX_out(MUX_wire_connect));
+    
+PC_MUX PC_MUX_connect(
+    .MUX_in_00(INC4_split),
+    .MUX_in_01(MUX_wire_connect),
+    .MUX_in_10(const_split),
+    .select(select),
+    .PC_MUX_out(register_wire_connect));
+    
+PC_REGISTER PC_register_connect(
+    .next_PC(register_wire_connect),
+    .clk(clock),
+    .reset(reset),
+    .stay(stay),
+    .PC_Register_out(PC_out));
 endmodule
 
 
