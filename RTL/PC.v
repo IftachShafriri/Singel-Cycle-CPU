@@ -4,12 +4,14 @@
 module PC(constant, select, clock, reset, stay, PC_out);
 input clock, reset, stay;
 input [1:0] select;
-input [`CONSTANT_WIDTH - 1 : 0] constant;
+input [`PC_WIDTH - 1 : 0] constant;
 output [`PC_WIDTH - 1 : 0] PC_out;
 
 //wires
-wire [`PC_WIDTH - 1 : 0] INC4_split, branch_wire, const_split, MUX_wire_connect, register_wire_connect ;
-wire neg_wire_select
+wire [`PC_WIDTH - 1 : 0] INC4_split, branch_wire, sign_connect, MUX_wire_connect, register_wire_connect ,const_split;
+wire neg_wire_select;
+wire [`BRANCH_OFFSET_WIDTH - 1 : 0] branch_const;
+
 
 //ports
 INC4 inc4_connect(
@@ -18,13 +20,13 @@ INC4 inc4_connect(
 
 BRANCH branch_connect(
     .Branch_in(PC_out),
-    .constant_in(const_split),
+    .constant_in(sign_connect),
     .Branch_out(branch_wire),
     .Neg_check_select(neg_wire_select));
 
 Sign_Extension_Const Sign_Extension_connect(
-    .constant_out(const_split),
-    .constant_in(constant));
+    .constant_out(sign_connect),
+    .constant_in(constant[`REGISTER_ADDR_WIDTH + `CONSTANT_WIDTH - 1 : `COND_WIDTH]));
 
 NEG_MUX_2_1 NEG_MUX_connect(
     .NEG_MUX_in_0(branch_wire),
@@ -35,7 +37,7 @@ NEG_MUX_2_1 NEG_MUX_connect(
 PC_MUX PC_MUX_connect(
     .MUX_in_00(INC4_split),
     .MUX_in_01(MUX_wire_connect),
-    .MUX_in_10(const_split),
+    .MUX_in_10(constant),
     .select(select),
     .PC_MUX_out(register_wire_connect));
     
@@ -72,9 +74,9 @@ reg [`PC_WIDTH - 1 : 0] MUX_out;
 output [`PC_WIDTH - 1 : 0] PC_MUX_out;
 always @* begin
     case(select) 
-    2'b00 : MUX_out = MUX_in_00;
-    2'b01 : MUX_out = MUX_in_01;
-    2'b10 : MUX_out = MUX_in_10;
+    2'b00 : MUX_out = MUX_in_00; // INC4
+    2'b01 : MUX_out = MUX_in_01; // BRANCH
+    2'b10 : MUX_out = MUX_in_10; // JUMP
     default : MUX_out = MUX_in_00;
     endcase
 end
@@ -90,6 +92,7 @@ always @* begin
     case(NEG_MUX_select)
     1'b0 : NEG_MUX_out =  NEG_MUX_in_0; // BRANCH
     1'b1 : NEG_MUX_out =  NEG_MUX_in_1; // INC4
+    default: NEG_MUX_out = NEG_MUX_in_1;
     endcase
 end
 endmodule
@@ -103,20 +106,18 @@ endmodule
 
 
 module Sign_Extension_Const(constant_in, constant_out);
-input [`CONSTANT_WIDTH - 1 : 0] constant_in;
+input [`BRANCH_OFFSET_WIDTH - 1 : 0] constant_in;
 output [`PC_WIDTH - 1 : 0] constant_out;
-assign constant_out = {{(`PC_WIDTH - `CONSTANT_WIDTH){constant_in[`CONSTANT_WIDTH - 1]}}, constant_in};
+assign constant_out = {{(`PC_WIDTH - `BRANCH_OFFSET_WIDTH){constant_in[`BRANCH_OFFSET_WIDTH - 1]}}, constant_in};
 endmodule
 
 
-module BRANCH(Branch_in, constant_in, Branch_out,Neg_check_select);
+module BRANCH(Branch_in, constant_in, Branch_out, Neg_check_select);
 input [`PC_WIDTH - 1 : 0] Branch_in ,constant_in;
 output [`PC_WIDTH - 1 : 0] Branch_out;
 wire [`PC_WIDTH  : 0] wire_check;
 output Neg_check_select;
-assign wire_check = {1'b0, Branch_in} + {constant_in[`PC_WIDTH - 1], constant_in};
+assign wire_check ={1'b0, Branch_in} + ({constant_in[`PC_WIDTH - 1], constant_in} << 2);
 assign Neg_check_select = wire_check[`PC_WIDTH]; // if == 1 num < 0 else == 0 num >0
 assign Branch_out = wire_check[`PC_WIDTH - 1 : 0];
 endmodule
-
-
