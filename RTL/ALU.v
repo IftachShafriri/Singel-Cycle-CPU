@@ -6,7 +6,7 @@ module ALU #(parameter WIDTH = `Data_WIDTH) (a, b, y, ALU_OP, overflow, zero);
 input signed [WIDTH - 1 : 0] a, b ;
 input [`ALU_OPCODE_WIDTH -1 : 0] ALU_OP ;
 output reg signed [WIDTH - 1 : 0] y ;
-output reg overflow ;
+output reg overflow, carry ;
 output zero ;
 
 
