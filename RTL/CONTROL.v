@@ -2,11 +2,11 @@
 `include "Include/DATA.v"
 //////////////////////////////////////
 //MAIN CONTROL BLOCK
-module CONTROL_BLOCK(INSTRUCTION, Rrb_in, Rrc_in,PC_select_out, ALU_OP, ALU_A_in, ALU_B_in ,MEM_enable_write, RF_enable_write, write_MUX_select,PC, Ra, Rb, Rc);
+module CONTROL_BLOCK(INSTRUCTION, Rrb_in, Rrc_in,PC_select_out, ALU_OP, ALU_A_in, ALU_B_in ,MEM_enable_write, RF_enable_write, write_MUX_select,PC, Ra, Rb, Rc, PC_CONSTANT);
 input [`INSTRUCTION_WIDTH - 1 : 0] INSTRUCTION;
 input [`Data_WIDTH -1 : 0] Rrb_in, Rrc_in;
 input [`PC_WIDTH -1 : 0] PC;
-output reg MEM_enable_write, MEM_enable_read RF_enable_write, write_MUX_select;
+output reg MEM_enable_write, RF_enable_write, write_MUX_select;
 output reg [`ALU_OPCODE_WIDTH -1 : 0] ALU_OP;
 output [`Data_WIDTH -1 : 0] ALU_A_in, ALU_B_in;
 output [`REGISTER_ADDR_WIDTH - 1 : 0] Ra, Rb, Rc;
@@ -42,10 +42,8 @@ end
 always @* begin
     if ((op == `OP_LD) || (op == `OP_LDR))
         write_MUX_select = 1'b1;
-        MEM_enable_read = 1'b1;
     else
         write_MUX_select = 1'b0;
-        MEM_enable_read = 1'b0;
 
 end
 always @* begin
