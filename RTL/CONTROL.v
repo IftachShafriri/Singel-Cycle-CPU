@@ -6,7 +6,7 @@ module CONTROL_BLOCK(INSTRUCTION, Rrb_in, Rrc_in,PC_select_out, ALU_OP, ALU_A_in
 input [`INSTRUCTION_WIDTH - 1 : 0] INSTRUCTION;
 input [`Data_WIDTH -1 : 0] Rrb_in, Rrc_in;
 input [`PC_WIDTH -1 : 0] PC;
-output reg MEM_enable_write, RF_enable_write, write_MUX_select;
+output reg MEM_enable_write, MEM_enable_read RF_enable_write, write_MUX_select;
 output reg [`ALU_OPCODE_WIDTH -1 : 0] ALU_OP;
 output [`Data_WIDTH -1 : 0] ALU_A_in, ALU_B_in;
 output [`REGISTER_ADDR_WIDTH - 1 : 0] Ra, Rb, Rc;
@@ -36,12 +36,16 @@ COND_BLOCK COND_BLOCK_connect(.C3_cond_in(C3[`COND_WIDTH - 1 : 0]), .op(op), .Rr
 always @* begin
     MEM_enable_write = ((op == `OP_ST) || (op == `OP_STR));
     RF_enable_write = (op < `OP_ST);
+    
 end
+
 always @* begin
     if ((op == `OP_LD) || (op == `OP_LDR))
         write_MUX_select = 1'b1;
+        MEM_enable_read = 1'b1;
     else
         write_MUX_select = 1'b0;
+        MEM_enable_read = 1'b0;
 
 end
 always @* begin

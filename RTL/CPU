@@ -1,0 +1,16 @@
+`include "Include/Opcodes.v"
+`include "Include/DATA.v"
+`include "Include/ALU.v"
+`include "Include/CONTROL.v"
+`include "Include/MEMORY.v"
+`include "Include/PC.v"
+`include "Include/RF.v"
+
+
+module MUX_RF_Writ(write_mux_select, memory_data, ALU_result, RF_data_in );
+input write_mux_select;
+input [31:0] memory_data, ALU_result;
+output reg [31:0] RF_data_in;
+assign RF_data_in = write_mux_select ? memory_data : ALU_result;
+endmodule
+
