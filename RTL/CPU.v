@@ -12,9 +12,9 @@ wire [31:0] Rrb_data, Rrc_data,
             MEM_data_read, ALU_result, RF_MUX_connect,
             ALU_DATA_A, ALU_DATA_B, instraction_coonect;
 wire RF_enable_write, write_mux_select, MEM_enable_write, PC_enable;
-wire [3:0] ALU_OP
-wire [15:0] PC_connect
-wire [1:0] PC_MUX_connect
+wire [3:0] ALU_OP;
+wire [15:0] PC_connect;
+wire [1:0] PC_MUX_connect;
 
 // ALU CONNECTING
 ALU ALU_CONNECTING(.y(ALU_result), .a(ALU_DATA_A),
