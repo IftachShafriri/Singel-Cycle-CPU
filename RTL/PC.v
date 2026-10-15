@@ -52,11 +52,11 @@ endmodule
 
 module PC_REGISTER(next_PC, clk, reset, PC_Register_out);
 input [`PC_WIDTH - 1 : 0] next_PC;
-input clk, reset, ;
+input clk, reset ;
 output reg [`PC_WIDTH - 1 : 0] PC_Register_out;
 always @(posedge clk) begin
     if (reset) 
-        PC_Register_out <= 4'h0000;
+        PC_Register_out <= {`PC_WIDTH{1'b0}};
     else
         PC_Register_out <= next_PC;
 end
