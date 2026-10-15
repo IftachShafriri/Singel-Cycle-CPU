@@ -7,7 +7,7 @@ wire [5:0] Rc_address, Rb_address, Ra_address;
 wire [31:0] Rra_data, Rrb_data, Rrc_data,
             MEM_data_read, ALU_result, RF_MUX_connect,
             ALU_DATA_A, ALU_DATA_B, instraction_coonect;
-wire RF_enable_write, write_mux_select, MEM_enable_write, PC_enable;
+wire RF_enable_write, write_mux_select, MEM_enable_write, PC_stay;
 wire [3:0] ALU_OP;
 wire [15:0] PC_connect;
 wire [1:0] PC_MUX_connect;
@@ -15,6 +15,7 @@ wire [1:0] PC_MUX_connect;
 // ALU CONNECTING
 ALU ALU_CONNECTING(.y(ALU_result), .a(ALU_DATA_A),
             .b(ALU_DATA_B), .ALU_OP(ALU_OP));
+            
 // CONTROL CONNECTING
 CONTROL_BLOCK CONTROL_CONNECTING(.Ra(Ra_address),
             .Rb(Rb_address), .Rc(Rc_address),
@@ -26,6 +27,7 @@ CONTROL_BLOCK CONTROL_CONNECTING(.Ra(Ra_address),
             .ALU_OP(ALU_OP),
             .ALU_A_in(ALU_DATA_A), .ALU_B_in(ALU_DATA_B),
             .PC_select_out(PC_MUX_connect), .PC(PC_connect));
+
 //MUX REGISTER FILE CONNECT
 MUX_RF_Write MUX_RF_CONNECTING(.ALU_result(ALU_result),
             .write_mux_select(write_mux_select),
@@ -51,10 +53,7 @@ MEMORY MEMORY_CONNECTING(.MEM_data_write(Rra_data), .MEM_address(ALU_result),
 // PC CONNECTING
 PC PC_CONNECTING(.clock(clock), .reset(reset),
             .PC_out(PC_connect), .select(PC_MUX_connect),
-            .constant(instraction_coonect[15:0]),
-            .stay(PC_enable));
-
- 
+            .constant(instraction_coonect[15:0]));
 
 endmodule
 

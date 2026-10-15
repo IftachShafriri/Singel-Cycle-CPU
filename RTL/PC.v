@@ -1,8 +1,8 @@
 `include "Include/DATA.v"
 `include "Include/Opcodes.v"
 
-module PC(constant, select, clock, reset, stay, PC_out);
-input clock, reset, stay;
+module PC(constant, select, clock, reset, PC_out);
+input clock, reset;
 input [1:0] select;
 input [`PC_WIDTH - 1 : 0] constant;
 output [`PC_WIDTH - 1 : 0] PC_out;
@@ -45,21 +45,18 @@ PC_REGISTER PC_register_connect(
     .next_PC(register_wire_connect),
     .clk(clock),
     .reset(reset),
-    .stay(stay),
     .PC_Register_out(PC_out));
 endmodule
 
 
 
-module PC_REGISTER(next_PC, clk, reset, stay, PC_Register_out);
+module PC_REGISTER(next_PC, clk, reset, PC_Register_out);
 input [`PC_WIDTH - 1 : 0] next_PC;
-input clk, reset, stay;
+input clk, reset, ;
 output reg [`PC_WIDTH - 1 : 0] PC_Register_out;
 always @(posedge clk) begin
     if (reset) 
         PC_Register_out <= 4'h0000;
-    else if (stay)
-        PC_Register_out <= PC_Register_out;
     else
         PC_Register_out <= next_PC;
 end
