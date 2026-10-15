@@ -4,7 +4,7 @@
 //MAIN CONTROL BLOCK
 module CONTROL_BLOCK(INSTRUCTION,
                     Rrb_in, Rrc_in,
-                    PC_select_out, PC, PC_CONSTANT,
+                    PC_select_out, PC,
                     ALU_OP, ALU_A_in, ALU_B_in,
                     MEM_enable_write, RF_enable_write, write_MUX_select,
                     Ra, Rb, Rc);

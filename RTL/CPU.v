@@ -1,10 +1,6 @@
 `include "Include/Opcodes.v"
 `include "Include/DATA.v"
-`include "Include/ALU.v"
-`include "Include/CONTROL.v"
-`include "Include/MEMORY.v"
-`include "Include/PC.v"
-`include "Include/RF.v"
+
 module MAIN_CPU(clock, reset);
 input clock, reset;
 wire [5:0] Rc_address, Rb_address, Ra_address;
@@ -23,7 +19,7 @@ ALU ALU_CONNECTING(.y(ALU_result), .a(ALU_DATA_A),
 CONTROL_BLOCK CONTROL_CONNECTING(.Ra(Ra_address),
             .Rb(Rb_address), .Rc(Rc_address),
             .INSTRUCTION(instraction_coonect),
-            .Rrb_in(Rrb_data), Rrc_in(Rrc_data),
+            .Rrb_in(Rrb_data), .Rrc_in(Rrc_data),
             .write_MUX_select(write_mux_select),
             .MEM_enable_write(MEM_enable_write),
             .RF_enable_write(RF_enable_write),
@@ -56,7 +52,7 @@ MEMORY MEMORY_CONNECTING(.MEM_data_write(Rra_data), .MEM_address(ALU_result),
 PC PC_CONNECTING(.clock(clock), .reset(reset),
             .PC_out(PC_connect), .select(PC_MUX_connect),
             .constant(instraction_coonect[15:0]),
-            .enable(PC_enable));
+            .stay(PC_enable));
 
  
 
@@ -65,7 +61,7 @@ endmodule
 module MUX_RF_Write(write_mux_select, memory_data, ALU_result, RF_data_in );
 input write_mux_select;
 input [31:0] memory_data, ALU_result;
-output reg [31:0] RF_data_in;
+output [31:0] RF_data_in;
 assign RF_data_in = write_mux_select ? memory_data : ALU_result;
 endmodule
 
