@@ -2,7 +2,12 @@
 `include "Include/DATA.v"
 //////////////////////////////////////
 //MAIN CONTROL BLOCK
-module CONTROL_BLOCK(INSTRUCTION, Rrb_in, Rrc_in,PC_select_out, ALU_OP, ALU_A_in, ALU_B_in ,MEM_enable_write, RF_enable_write, write_MUX_select,PC, Ra, Rb, Rc, PC_CONSTANT);
+module CONTROL_BLOCK(INSTRUCTION,
+                    Rrb_in, Rrc_in,
+                    PC_select_out, PC, PC_CONSTANT,
+                    ALU_OP, ALU_A_in, ALU_B_in,
+                    MEM_enable_write, RF_enable_write, write_MUX_select,
+                    Ra, Rb, Rc);
 input [`INSTRUCTION_WIDTH - 1 : 0] INSTRUCTION;
 input [`Data_WIDTH -1 : 0] Rrb_in, Rrc_in;
 input [`PC_WIDTH -1 : 0] PC;
