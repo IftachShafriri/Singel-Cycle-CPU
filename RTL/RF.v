@@ -18,9 +18,9 @@ input [Register_Size_Bit -1 : 0] data_write;
 input clk, enable_write, reset;
 output [Register_Size_Bit -1 : 0] data_read1, data_read2, data_read3;
 
+assign data_read3 = registers[write_address]; // Rra
 assign data_read1 = registers[read_address1]; // Rrb    
 assign data_read2 = registers[read_address2]; // Rrc
-assign data_read3 = registers[write_address]; // Rra
 
 integer i;
 
