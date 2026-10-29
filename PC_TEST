@@ -1,0 +1,265 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "14.0 (devel)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_0000029AAF8A8890 .scope module, "PC_tb" "PC_tb" 2 4;
+ .timescale 0 0;
+v0000029AAF908350_0 .net "PC_out", 15 0, v0000029AAF88FB20_0;  1 drivers
+v0000029AAF907450_0 .var "clock", 0 0;
+v0000029AAF906A50_0 .var "constant", 15 0;
+v0000029AAF907770_0 .var/i "i", 31 0;
+v0000029AAF907C70_0 .var "reset", 0 0;
+v0000029AAF907F90_0 .var "select", 1 0;
+S_0000029AAF8A8A20 .scope module, "dut" "PC" 2 10, 3 4 0, S_0000029AAF8A8890;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "constant";
+    .port_info 1 /INPUT 2 "select";
+    .port_info 2 /INPUT 1 "clock";
+    .port_info 3 /INPUT 1 "reset";
+    .port_info 4 /OUTPUT 16 "PC_out";
+v0000029AAF906B90_0 .net "INC4_split", 15 0, L_0000029AAF908210;  1 drivers
+v0000029AAF907130_0 .net "MUX_wire_connect", 15 0, v0000029AAF88F800_0;  1 drivers
+v0000029AAF906EB0_0 .net "PC_out", 15 0, v0000029AAF88FB20_0;  alias, 1 drivers
+v0000029AAF907270_0 .net "branch_wire", 15 0, L_0000029AAF908670;  1 drivers
+v0000029AAF9073B0_0 .net "clock", 0 0, v0000029AAF907450_0;  1 drivers
+v0000029AAF9079F0_0 .net "constant", 15 0, v0000029AAF906A50_0;  1 drivers
+v0000029AAF908530_0 .net "neg_wire_select", 0 0, L_0000029AAF9074F0;  1 drivers
+v0000029AAF9069B0_0 .net "register_wire_connect", 15 0, L_0000029AAF907590;  1 drivers
+v0000029AAF906910_0 .net "reset", 0 0, v0000029AAF907C70_0;  1 drivers
+v0000029AAF907310_0 .net "select", 1 0, v0000029AAF907F90_0;  1 drivers
+v0000029AAF908170_0 .net "sign_connect", 15 0, L_0000029AAF9078B0;  1 drivers
+L_0000029AAF908710 .part v0000029AAF906A50_0, 3, 12;
+S_0000029AAF8A8BB0 .scope module, "NEG_MUX_connect" "NEG_MUX_2_1" 3 31, 3 84 0, S_0000029AAF8A8A20;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "NEG_MUX_in_0";
+    .port_info 1 /INPUT 16 "NEG_MUX_in_1";
+    .port_info 2 /INPUT 1 "NEG_MUX_select";
+    .port_info 3 /OUTPUT 16 "NEG_MUX_out";
+v0000029AAF88F6C0_0 .net "NEG_MUX_in_0", 15 0, L_0000029AAF908670;  alias, 1 drivers
+v0000029AAF88F1C0_0 .net "NEG_MUX_in_1", 15 0, L_0000029AAF908210;  alias, 1 drivers
+v0000029AAF88F800_0 .var "NEG_MUX_out", 15 0;
+v0000029AAF88FD00_0 .net "NEG_MUX_select", 0 0, L_0000029AAF9074F0;  alias, 1 drivers
+E_0000029AAF8928D0 .event anyedge, v0000029AAF88FD00_0, v0000029AAF88F6C0_0, v0000029AAF88F1C0_0;
+S_0000029AAF89E670 .scope module, "PC_MUX_connect" "PC_MUX" 3 37, 3 67 0, S_0000029AAF8A8A20;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "MUX_in_00";
+    .port_info 1 /INPUT 16 "MUX_in_01";
+    .port_info 2 /INPUT 16 "MUX_in_10";
+    .port_info 3 /INPUT 2 "select";
+    .port_info 4 /OUTPUT 16 "PC_MUX_out";
+v0000029AAF88F8A0_0 .net "MUX_in_00", 15 0, L_0000029AAF908210;  alias, 1 drivers
+v0000029AAF88F760_0 .net "MUX_in_01", 15 0, v0000029AAF88F800_0;  alias, 1 drivers
+v0000029AAF88FC60_0 .net "MUX_in_10", 15 0, v0000029AAF906A50_0;  alias, 1 drivers
+v0000029AAF88F940_0 .var "MUX_out", 15 0;
+v0000029AAF88FDA0_0 .net "PC_MUX_out", 15 0, L_0000029AAF907590;  alias, 1 drivers
+v0000029AAF88FEE0_0 .net *"_ivl_1", 13 0, L_0000029AAF9087B0;  1 drivers
+L_0000029AAFC40160 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
+v0000029AAF88FF80_0 .net/2u *"_ivl_2", 1 0, L_0000029AAFC40160;  1 drivers
+v0000029AAF88F300_0 .net "select", 1 0, v0000029AAF907F90_0;  alias, 1 drivers
+E_0000029AAF892B10 .event anyedge, v0000029AAF88F300_0, v0000029AAF88F1C0_0, v0000029AAF88F800_0, v0000029AAF88FC60_0;
+L_0000029AAF9087B0 .part v0000029AAF88F940_0, 2, 14;
+L_0000029AAF907590 .concat [ 2 14 0 0], L_0000029AAFC40160, L_0000029AAF9087B0;
+S_0000029AAF89E800 .scope module, "PC_register_connect" "PC_REGISTER" 3 44, 3 53 0, S_0000029AAF8A8A20;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "next_PC";
+    .port_info 1 /INPUT 1 "clk";
+    .port_info 2 /INPUT 1 "reset";
+    .port_info 3 /OUTPUT 16 "PC_Register_out";
+v0000029AAF88FB20_0 .var "PC_Register_out", 15 0;
+v0000029AAF88F080_0 .net "clk", 0 0, v0000029AAF907450_0;  alias, 1 drivers
+v0000029AAF88F120_0 .net "next_PC", 15 0, L_0000029AAF907590;  alias, 1 drivers
+v0000029AAF88F4E0_0 .net "reset", 0 0, v0000029AAF907C70_0;  alias, 1 drivers
+E_0000029AAF8923D0 .event posedge, v0000029AAF88F080_0;
+S_0000029AAF89E990 .scope module, "Sign_Extension_connect" "Sign_Extension_Const" 3 27, 3 105 0, S_0000029AAF8A8A20;
+ .timescale 0 0;
+    .port_info 0 /INPUT 12 "constant_in";
+    .port_info 1 /OUTPUT 16 "constant_out";
+v0000029AAF88F260_0 .net *"_ivl_1", 0 0, L_0000029AAF907090;  1 drivers
+v0000029AAF88F9E0_0 .net *"_ivl_3", 3 0, L_0000029AAF908490;  1 drivers
+v0000029AAF88FA80_0 .net "constant_in", 11 0, L_0000029AAF908710;  1 drivers
+v0000029AAF88F3A0_0 .net "constant_out", 15 0, L_0000029AAF9078B0;  alias, 1 drivers
+L_0000029AAF907090 .part L_0000029AAF908710, 11, 1;
+L_0000029AAF908490 .repeat 4, 4, L_0000029AAF907090;
+L_0000029AAF9078B0 .concat [ 12 4 0 0], L_0000029AAF908710, L_0000029AAF908490;
+S_0000029AAF8A0BC0 .scope module, "branch_connect" "BRANCH" 3 21, 3 112 0, S_0000029AAF8A8A20;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "Branch_in";
+    .port_info 1 /INPUT 16 "constant_in";
+    .port_info 2 /OUTPUT 16 "Branch_out";
+    .port_info 3 /OUTPUT 1 "Neg_check_select";
+v0000029AAF88FBC0_0 .net "Branch_in", 15 0, v0000029AAF88FB20_0;  alias, 1 drivers
+v0000029AAF88F440_0 .net "Branch_out", 15 0, L_0000029AAF908670;  alias, 1 drivers
+v0000029AAF88F580_0 .net "Neg_check_select", 0 0, L_0000029AAF9074F0;  alias, 1 drivers
+L_0000029AAFC400D0 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0000029AAF88F620_0 .net/2u *"_ivl_0", 0 0, L_0000029AAFC400D0;  1 drivers
+v0000029AAF907D10_0 .net *"_ivl_10", 14 0, L_0000029AAF906F50;  1 drivers
+L_0000029AAFC40118 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
+v0000029AAF906AF0_0 .net *"_ivl_12", 1 0, L_0000029AAFC40118;  1 drivers
+v0000029AAF907DB0_0 .net *"_ivl_2", 16 0, L_0000029AAF906C30;  1 drivers
+v0000029AAF908030_0 .net *"_ivl_5", 0 0, L_0000029AAF906D70;  1 drivers
+v0000029AAF9085D0_0 .net *"_ivl_6", 16 0, L_0000029AAF906E10;  1 drivers
+v0000029AAF907E50_0 .net *"_ivl_8", 16 0, L_0000029AAF9082B0;  1 drivers
+v0000029AAF907EF0_0 .net "constant_in", 15 0, L_0000029AAF9078B0;  alias, 1 drivers
+v0000029AAF906CD0_0 .net "wire_check", 16 0, L_0000029AAF9083F0;  1 drivers
+L_0000029AAF906C30 .concat [ 16 1 0 0], v0000029AAF88FB20_0, L_0000029AAFC400D0;
+L_0000029AAF906D70 .part L_0000029AAF9078B0, 15, 1;
+L_0000029AAF906E10 .concat [ 16 1 0 0], L_0000029AAF9078B0, L_0000029AAF906D70;
+L_0000029AAF906F50 .part L_0000029AAF906E10, 0, 15;
+L_0000029AAF9082B0 .concat [ 2 15 0 0], L_0000029AAFC40118, L_0000029AAF906F50;
+L_0000029AAF9083F0 .arith/sum 17, L_0000029AAF906C30, L_0000029AAF9082B0;
+L_0000029AAF9074F0 .part L_0000029AAF9083F0, 16, 1;
+L_0000029AAF908670 .part L_0000029AAF9083F0, 0, 16;
+S_0000029AAF8A0D50 .scope module, "inc4_connect" "INC4" 3 17, 3 98 0, S_0000029AAF8A8A20;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "INC4_in";
+    .port_info 1 /OUTPUT 16 "INC4_out";
+v0000029AAF906FF0_0 .net "INC4_in", 15 0, v0000029AAF88FB20_0;  alias, 1 drivers
+v0000029AAF9080D0_0 .net "INC4_out", 15 0, L_0000029AAF908210;  alias, 1 drivers
+L_0000029AAFC40088 .functor BUFT 1, C4<0000000000000100>, C4<0>, C4<0>, C4<0>;
+v0000029AAF9071D0_0 .net/2u *"_ivl_0", 15 0, L_0000029AAFC40088;  1 drivers
+L_0000029AAF908210 .arith/sum 16, v0000029AAF88FB20_0, L_0000029AAFC40088;
+    .scope S_0000029AAF8A8BB0;
+T_0 ;
+    %wait E_0000029AAF8928D0;
+    %load/vec4 v0000029AAF88FD00_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 1;
+    %cmp/e;
+    %jmp/1 T_0.0, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 1;
+    %cmp/e;
+    %jmp/1 T_0.1, 6;
+    %load/vec4 v0000029AAF88F1C0_0;
+    %store/vec4 v0000029AAF88F800_0, 0, 16;
+    %jmp T_0.3;
+T_0.0 ;
+    %load/vec4 v0000029AAF88F6C0_0;
+    %store/vec4 v0000029AAF88F800_0, 0, 16;
+    %jmp T_0.3;
+T_0.1 ;
+    %load/vec4 v0000029AAF88F1C0_0;
+    %store/vec4 v0000029AAF88F800_0, 0, 16;
+    %jmp T_0.3;
+T_0.3 ;
+    %pop/vec4 1;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0000029AAF89E670;
+T_1 ;
+    %wait E_0000029AAF892B10;
+    %load/vec4 v0000029AAF88F300_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 2;
+    %cmp/e;
+    %jmp/1 T_1.0, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 2;
+    %cmp/e;
+    %jmp/1 T_1.1, 6;
+    %dup/vec4;
+    %pushi/vec4 2, 0, 2;
+    %cmp/e;
+    %jmp/1 T_1.2, 6;
+    %load/vec4 v0000029AAF88F8A0_0;
+    %store/vec4 v0000029AAF88F940_0, 0, 16;
+    %jmp T_1.4;
+T_1.0 ;
+    %load/vec4 v0000029AAF88F8A0_0;
+    %store/vec4 v0000029AAF88F940_0, 0, 16;
+    %jmp T_1.4;
+T_1.1 ;
+    %load/vec4 v0000029AAF88F760_0;
+    %store/vec4 v0000029AAF88F940_0, 0, 16;
+    %jmp T_1.4;
+T_1.2 ;
+    %load/vec4 v0000029AAF88FC60_0;
+    %store/vec4 v0000029AAF88F940_0, 0, 16;
+    %jmp T_1.4;
+T_1.4 ;
+    %pop/vec4 1;
+    %jmp T_1;
+    .thread T_1, $push;
+    .scope S_0000029AAF89E800;
+T_2 ;
+    %wait E_0000029AAF8923D0;
+    %load/vec4 v0000029AAF88F4E0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_2.0, 8;
+    %pushi/vec4 0, 0, 16;
+    %assign/vec4 v0000029AAF88FB20_0, 0;
+    %jmp T_2.1;
+T_2.0 ;
+    %load/vec4 v0000029AAF88F120_0;
+    %assign/vec4 v0000029AAF88FB20_0, 0;
+T_2.1 ;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0000029AAF8A8890;
+T_3 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000029AAF907450_0, 0, 1;
+T_3.0 ;
+    %delay 5, 0;
+    %load/vec4 v0000029AAF907450_0;
+    %inv;
+    %store/vec4 v0000029AAF907450_0, 0, 1;
+    %jmp T_3.0;
+T_3.1 ;
+    %end;
+    .thread T_3;
+    .scope S_0000029AAF8A8890;
+T_4 ;
+    %vpi_call 2 22 "$monitor", "time = %0t, current_PC = %0d, next_PC = %0d, reset_status = %0b", $time, v0000029AAF908350_0, v0000029AAF9069B0_0, v0000029AAF907C70_0 {0 0 0};
+    %end;
+    .thread T_4;
+    .scope S_0000029AAF8A8890;
+T_5 ;
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v0000029AAF907F90_0, 0, 2;
+    %pushi/vec4 0, 0, 16;
+    %store/vec4 v0000029AAF906A50_0, 0, 16;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0000029AAF907C70_0, 0, 1;
+    %wait E_0000029AAF8923D0;
+    %delay 1, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000029AAF907C70_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000029AAF907770_0, 0, 32;
+T_5.0 ; Top of for-loop
+    %load/vec4 v0000029AAF907770_0;
+    %cmpi/s 10, 0, 32;
+	  %jmp/0xz T_5.1, 5;
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v0000029AAF907F90_0, 0, 2;
+    %pushi/vec4 0, 0, 16;
+    %store/vec4 v0000029AAF906A50_0, 0, 16;
+    %wait E_0000029AAF8923D0;
+T_5.2 ; for-loop step statement
+    %load/vec4 v0000029AAF907770_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0000029AAF907770_0, 0, 32;
+    %jmp T_5.0;
+T_5.1 ; for-loop exit label
+    %vpi_call 2 42 "$display", " mark" {0 0 0};
+    %pushi/vec4 64852, 0, 16;
+    %store/vec4 v0000029AAF906A50_0, 0, 16;
+    %pushi/vec4 2, 0, 2;
+    %store/vec4 v0000029AAF907F90_0, 0, 2;
+    %wait E_0000029AAF8923D0;
+    %vpi_call 2 50 "$finish" {0 0 0};
+    %end;
+    .thread T_5;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "Verification/PC_tb.v";
+    "RTL/PC.v";
